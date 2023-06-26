@@ -29,7 +29,7 @@ class ContactMessage(BaseModel):
 @app.post("/contact")
 async def editLine(message: ContactMessage):
     try:
-        with smtplib.SMTP_SSL("mail.privateemail.com", port, context=context) as server
+        with smtplib.SMTP_SSL("mail.privateemail.com", port, context=context) as server:
             server.login("amilmore@alexmilmore.com", password)
             server.sendmail("amilmore@alexmilmore.com", "amilmore@alexmilmore.com", f"FROM\n{message.sender}\n\nMESSAGE\n{message.msg}")
             return {"success": True}
