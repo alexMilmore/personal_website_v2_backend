@@ -21,6 +21,8 @@ app.add_middleware(
 port = 465  # For SSL
 password = "_dP$.gZn-xX8r,#"
 context = ssl.create_default_context()
+server = smtplib.SMTP_SSL("mail.privateemail.com", port, context=context)
+server.login("amilmore@alexmilmore.com", password)
 
 class ContactMessage(BaseModel):
     sender: str
@@ -29,9 +31,7 @@ class ContactMessage(BaseModel):
 @app.post("/contact")
 async def editLine(message: ContactMessage):
     try:
-        with smtplib.SMTP_SSL("mail.privateemail.com", port, context=context) as server:
-            server.login("amilmore@alexmilmore.com", password)
-            server.sendmail("amilmore@alexmilmore.com", "amilmore@alexmilmore.com", f"FROM\n{message.sender}\n\nMESSAGE\n{message.msg}")
+        server.sendmail("amilmore@alexmilmore.com", "amilmore@alexmilmore.com", f"FROM\n{message.sender}\n\nMESSAGE\n{message.msg}")
         return {"success": True}
     except:
         return {"success": False}
