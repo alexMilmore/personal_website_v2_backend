@@ -34,6 +34,7 @@ async def editLine(message: ContactMessage):
         server.sendmail("amilmore@alexmilmore.com", "amilmore@alexmilmore.com", f"FROM\n{message.sender}\n\nMESSAGE\n{message.msg}")
         return {"success": True}
     except:
+        print("failed to send email")
         return {"success": False}
 
 @app.get("/health")
