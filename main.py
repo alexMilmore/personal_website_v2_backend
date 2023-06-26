@@ -35,3 +35,7 @@ async def editLine(message: ContactMessage):
         return {"success": True}
     except:
         return {"success": False}
+
+@app.get("/health")
+async def editLine():
+    return "Hello World"
